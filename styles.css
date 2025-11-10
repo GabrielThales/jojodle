@@ -1,0 +1,126 @@
+/* Estilos gerais */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+}
+
+header {
+    text-align: center;
+    margin: 20px 0;
+}
+
+main {
+    width: 90%;
+    /* Aumentamos o tamanho máximo para caber as colunas */
+    max-width: 800px; 
+}
+
+/* Seção de adivinhação */
+.guess-section {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+#guess-input {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#guess-button, #hint-button {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#guess-button:hover, #hint-button:hover {
+    background-color: #0056b3;
+}
+
+#hint-button {
+    background-color: #17a2b8; /* Cor diferente para a dica */
+    width: 100%;
+    margin-top: 10px;
+}
+
+/* Feedback de erro/dica */
+#feedback-text {
+    color: red;
+    text-align: center;
+    min-height: 1.2em;
+    font-size: 0.9em;
+}
+
+/* * MUDANÇA PRINCIPAL: Grid de Resultados
+ * Agora temos 6 colunas. 
+ * A primeira (Personagem) será maior que as outras.
+ */
+.results-header, .result-row {
+    display: grid;
+    /* 2fr (Personagem) + 1fr (Idade) + 1fr (Parte) + 1.5fr (Nac) + 1fr (Gen) + 1.5fr (Stand) */
+    grid-template-columns: 2fr 1fr 1fr 1.5fr 1fr 1.5fr; 
+    gap: 5px;
+    text-align: center;
+    margin-bottom: 5px;
+    align-items: center; /* Alinha verticalmente */
+}
+
+.result-cell {
+    padding: 8px; /* Reduz um pouco o padding para caber */
+    border-radius: 3px;
+    color: white;
+    min-height: 40px; /* Altura mínima */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85em; /* Fonte menor para caber mais info */
+    overflow: hidden; /* Evita que texto grande quebre o layout */
+    text-overflow: ellipsis;
+}
+
+.results-header .header-cell {
+    font-weight: bold;
+    background-color: #e9ecef;
+    color: #333; /* Texto escuro para header */
+}
+
+/* Célula específica do personagem (nome + imagem) */
+.cell-character {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Alinha à esquerda */
+    gap: 8px;
+    padding: 5px; /* Padding menor */
+}
+
+.char-image {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 50%; /* Imagem redonda */
+    border: 2px solid white;
+}
+
+/* Cores das pistas */
+.correct {
+    background-color: #28a745; /* Verde - Correto */
+}
+
+.incorrect {
+    background-color: #dc3545; /* Vermelho - Incorreto */
+}
+
+.partial {
+    background-color: #ffc107; /* Amarelo - Parcial (setas) */
+    color: #333; /* Texto escuro para melhor leitura no amarelo */
+}
