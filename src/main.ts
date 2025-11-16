@@ -22,8 +22,8 @@ type Character = {
 
 // --- URLs DA NOSSA API ---
 // Lembre-se que temos DOIS servidores a rodar
-const API_URL_DADOS = 'http://localhost:3000'; // Nosso Express (Dados)
-const API_URL_IA = 'http://localhost:4000';    // Nosso Genkit (IA/Dicas)
+const API_URL_DADOS = 'https://jojodle-backend.vercel.app/'; // Nosso Express (Dados)
+const API_URL_IA = 'https://jojodle-backend.vercel.app/';    // Nosso Genkit (IA/Dicas)
 
 
 // --- Variáveis Globais do Jogo ---
@@ -69,7 +69,7 @@ async function initGame() {
         targetCharacter = await responseTarget.json();
 
         // Psst... A cola para testes
-        console.log("Personagem Secreto (Cola):", targetCharacter.name); 
+        //console.log("Personagem Secreto (Cola):", targetCharacter.name); 
 
         // 3. Jogo pronto!
         feedbackText.textContent = "Personagens carregados. Tente adivinhar!";
