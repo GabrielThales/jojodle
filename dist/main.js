@@ -14,8 +14,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 // --- URLs DA NOSSA API ---
 // Lembre-se que temos DOIS servidores a rodar
-const API_URL_DADOS = 'https://jojodle-backend.vercel.app/'; // Nosso Express (Dados)
-const API_URL_IA = 'https://jojodle-backend.vercel.app/'; // Nosso Genkit (IA/Dicas)
+const API_URL_DADOS = 'https://jojodle-backend.vercel.app'; // Nosso Express (Dados)
+const API_URL_IA = 'https://jojodle-backend.vercel.app'; // Nosso Genkit (IA/Dicas)
 // --- Variáveis Globais do Jogo ---
 let targetCharacter; // O personagem secreto (vem da API)
 let allCharactersDB = []; // A lista de todos os personagens (vem da API)
