@@ -16,7 +16,7 @@ report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 *.sublime-workspace
 
 # Build artifacts
-dist/
+#dist/
 build/
 coverage/
 
