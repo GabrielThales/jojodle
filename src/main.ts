@@ -22,8 +22,8 @@ type Character = {
 
 // --- URLs DA NOSSA API ---
 // Lembre-se que temos DOIS servidores a rodar
-const API_URL_DADOS = 'https://jojodle-backend.vercel.app'; // Nosso Express (Dados)
-const API_URL_IA = 'https://jojodle-backend.vercel.app';    // Nosso Genkit (IA/Dicas)
+const API_URL_DADOS = 'https://jojodle-backendv2.vercel.app'; // Nosso Express (Dados)
+const API_URL_IA = 'https://jojodle-backendv2.vercel.app';    // Nosso Genkit (IA/Dicas)
 
 
 // --- Variáveis Globais do Jogo ---
