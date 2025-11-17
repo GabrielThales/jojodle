@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale-1.0">
+    <title>JoJodle - Adivinhe o Personagem!</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header>
+        <h1>JoJodle</h1>
+        <p>Adivinhe o personagem de JoJo do dia!</p>
+    </header>
+
+    <main>
+        <div class="guess-container">
+            <div class="guess-section">
+                <input type="text" id="guess-input" placeholder="Digite o nome de um personagem">
+                <button id="guess-button">Tentar</button>
+            </div>
+    
+            <div id="autocomplete-suggestions"></div>
+        </div>
+
+        <p id="feedback-text"></p>
+        <button id="hint-button" style="display: none;">Pedir Dica</button>
+
+        <div class="results-header">
+            <div class="result-cell header-cell">Personagem</div>
+            <div class="result-cell header-cell">Idade</div>
+            <div class="result-cell header-cell">Parte</div>
+            <div class="result-cell header-cell">Nacionalidade</div>
+            <div class="result-cell header-cell">Gênero</div>
+            <div class="result-cell header-cell">Stand</div>
+        </div>
+
+        <div id="results-container">
+            </div>
+
+        <section class="character-gallery">
+            <h2>Personagens Jogáveis</h2>
+            <div id="character-cards-container">
+            </div>
+        </section>
+
+    </main>
+
+    <script type="module" src="./dist/main.js"></script>
+</body>
+</html>
