@@ -22,7 +22,7 @@ type Character = {
 
 // --- URLs DA NOSSA API ---
 // Lembre-se que temos DOIS servidores a rodar
-const API_URL_DADOS = 'https://jojodle-backendv2.vercel.app'; // Nosso Express (Dados)
+const API_URL_DADOS = 'https://jojodle-backendv2.vercel.app'; // Nosso Express (Dados) nova url
 const API_URL_IA = 'https://jojodle-backendv2.vercel.app';    // Nosso Genkit (IA/Dicas)
 
 
