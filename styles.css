@@ -1,17 +1,128 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
 /* Estilos gerais */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f2f5;
-    color: #333;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: #0a0a0a;
+    color: #e5e5e5;
     display: flex;
     flex-direction: column;
     align-items: center;
     margin: 0;
 }
 
+body::before {
+    content: 'ゴゴゴゴ';
+    position: fixed;
+    font-size: 20rem;
+    color: rgba(255, 215, 0, 0.03);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+    pointer-events: none;
+    font-weight: bold;
+}
+
 header {
     text-align: center;
     margin: 20px 0;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 50px;
+    padding-top: 40px;
+}
+
+.btn {
+    background: #141414;
+    border: 1px solid #2a2a2a;
+    color: #e5e5e5;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    border-color: #9400D3;
+    background: #1a1a1a;
+    transform: translateY(-2px);
+}
+
+.title {
+    font-size: 4rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FF1493 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 12px;
+    letter-spacing: -2px;
+    position: relative;
+}
+
+/* Acento sutil em vez de estrelas grandes */
+.title::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #FFD700, transparent);
+}
+
+.subtitle {
+    font-size: 1rem;
+    color: #737373;
+    font-weight: 400;
+    margin-bottom: 30px;
+}
+
+.stats {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.stat-badge {
+    background: #141414;
+    border: 1px solid #2a2a2a;
+    color: #e5e5e5;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Efeito hover sutil mas com cor JoJo */
+.stat-badge::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,215,0,0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.stat-badge:hover::before {
+    left: 100%;
+}
+
+.stat-badge:hover {
+    border-color: #FFD700;
+    transform: translateY(-2px);
 }
 
 main {
@@ -93,15 +204,20 @@ main {
 */
 
 #guess-button, #hint-button {
-    padding: 10px 15px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
+    background: #141414;
+    border: 1px solid #2a2a2a;
+    color: #e5e5e5;
+    padding: 10px 20px;
+    border-radius: 10px;
     cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
 }
 #guess-button:hover, #hint-button:hover {
-    background-color: #0056b3;
+    border-color: #9400D3;
+    background: #1a1a1a;
+    transform: translateY(-2px);
 }
 #hint-button {
     background-color: #17a2b8;
@@ -156,7 +272,7 @@ main {
 .char-image {
     width: 40px;
     height: 40px;
-    object-fit: cover;
+    object-fit: scale-down; /* Smaller of contain or original size */
     border-radius: 50%;
     border: 2px solid white;
 }

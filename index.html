@@ -2,16 +2,21 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale-1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JoJodle - Adivinhe o Personagem!</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-    <header>
-        <h1>JoJodle</h1>
-        <p>Adivinhe o personagem de JoJo do dia!</p>
-    </header>
+        <header class="header">
+            <h1 class="title">JoJodle</h1>
+            <p class="subtitle">Adivinhe o personagem de JoJo do dia</p>
+            <div class="stats">
+                <div class="stat-badge">
+                    ⭐ Sequência: <span id="streak">0</span>
+                </div>
+            </div>
+        </header>
 
     <main>
         <div class="guess-container">
@@ -24,7 +29,7 @@
         </div>
 
         <p id="feedback-text"></p>
-        <button id="hint-button" style="display: none;">Pedir Dica</button>
+        <button id="hint-button" style="display: none; background-color: #141414; margin-bottom: 15px;">Pedir Dica</button>
 
         <div class="results-header">
             <div class="result-cell header-cell">Personagem</div>

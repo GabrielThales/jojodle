@@ -42,8 +42,9 @@ const resultsContainer = document.getElementById('results-container') as HTMLDiv
 const feedbackText = document.getElementById('feedback-text') as HTMLParagraphElement;
 const hintButton = document.getElementById('hint-button') as HTMLButtonElement;
 const suggestionsContainer = document.getElementById('autocomplete-suggestions') as HTMLDivElement;
-
-
+const streak = document.getElementById('streak') as HTMLSpanElement;
+streak.innerText = '3';
+let currentStreak = 1;
 /*
  * Documentação: Inicialização do Jogo
  *
@@ -61,7 +62,6 @@ async function initGame() {
         allCharactersDB = await responseAll.json();
         console.log("Banco de dados local carregado:", allCharactersDB);
 
-        //renderCharacterCards(allCharactersDB);
 
         // 2. Buscar o PERSONAGEM DO DIA
         const responseTarget = await fetch(`${API_URL_DADOS}/character_of_the_day`);
@@ -73,6 +73,7 @@ async function initGame() {
 
         // 3. Jogo pronto!
         feedbackText.textContent = "Personagens carregados. Tente adivinhar!";
+
 
     } catch (error) {
         console.error("Erro ao iniciar o jogo:", error);
@@ -154,6 +155,8 @@ function handleGuess(): void {
     }
 
     guessInput.value = ''; // Limpa o input para a próxima
+    currentStreak++;
+    streak.innerText = currentStreak.toString();
 }
 
 // "Ouvintes" para o input e botões
@@ -171,7 +174,7 @@ hintButton.addEventListener('click', handleHint);
  * Esta função chama o nosso backend de IA (Genkit).
  */
 async function handleHint(): Promise<void> {
-    feedbackText.textContent = "A gerar uma dica... (Chamando IA)";
+    feedbackText.textContent = "Gerando uma dica... (Chamando IA)";
     hintButton.disabled = true; // Desativa o botão para evitar spam
 
     try {
@@ -203,44 +206,40 @@ async function handleHint(): Promise<void> {
  * um cartão visual para cada um.
  */
 function renderCharacterCards(characters: Character[]): void {
-    // 1. Captura o container (só precisamos dele aqui)
     const container = document.getElementById('character-cards-container');
     
-    // Se não encontrar o container, para a execução
     if (!container) {
-        console.error("Erro: Container '#character-cards-container' não foi encontrado.");
+        console.warn("Aviso: Container da galeria (#character-cards-container) não encontrado no HTML.");
         return;
     }
 
-    // 2. Limpa o container (caso esta função seja chamada novamente)
     container.innerHTML = '';
 
-    // 3. Faz um loop por cada personagem e cria o HTML
+    // Debug: Ver se a lista está vazia
+    if (characters.length === 0) {
+        container.innerHTML = '<p style="color: #666; text-align: center;">Nenhum personagem carregado.</p>';
+        return;
+    }
+
     for (const char of characters) {
-        // Cria o elemento 'div' principal do cartão
         const card = document.createElement('div');
-        card.classList.add('character-card');
+        card.className = 'character-card'; // Usa a classe do CSS
 
-        // Cria a imagem
         const img = document.createElement('img');
-        img.src = char.imageUrl;
-        img.alt = `Imagem de ${char.name}`;
+        // Usa char.imageUrl (se vier do DB com esse nome)
+        img.src = char.imageUrl; 
+        img.alt = char.name;
+        // Placeholder caso a imagem quebre
+        img.onerror = () => { img.src = 'https://placehold.co/100x100/333/FFF?text=JoJo'; };
 
-        // Cria o nome
         const name = document.createElement('p');
         name.textContent = char.name;
 
-        // Adiciona um "tooltip" (dica) ao passar o rato
-        // para o caso de o nome estar cortado
-        card.title = char.name;
-
-        // "Monta" o cartão
         card.appendChild(img);
         card.appendChild(name);
-
-        // Adiciona o cartão final ao container na página
         container.appendChild(card);
     }
+    console.log(`[Galeria] ${characters.length} cards renderizados.`);
 }
 
 
