@@ -31,6 +31,9 @@ const resultsContainer = document.getElementById('results-container');
 const feedbackText = document.getElementById('feedback-text');
 const hintButton = document.getElementById('hint-button');
 const suggestionsContainer = document.getElementById('autocomplete-suggestions');
+const streak = document.getElementById('streak');
+streak.innerText = '0';
+let currentStreak = 0;
 /*
  * Documentação: Inicialização do Jogo
  *
@@ -48,7 +51,6 @@ function initGame() {
                 throw new Error('Falha ao buscar lista de personagens.');
             allCharactersDB = yield responseAll.json();
             console.log("Banco de dados local carregado:", allCharactersDB);
-            //renderCharacterCards(allCharactersDB);
             // 2. Buscar o PERSONAGEM DO DIA
             const responseTarget = yield fetch(`${API_URL_DADOS}/character_of_the_day`);
             if (!responseTarget.ok)
@@ -109,7 +111,6 @@ function handleGuess() {
     }
     // Se encontrou, cria a linha de resultado
     createResultRow(guessedCharacter);
-    guessCount++; // Incrementa a tentativa
     // Verifica se o jogador ganhou
     if (guessedCharacter.name === targetCharacter.name) {
         feedbackText.textContent = `Parabéns! Você acertou: ${targetCharacter.name}!`;
@@ -124,6 +125,8 @@ function handleGuess() {
         }
     }
     guessInput.value = ''; // Limpa o input para a próxima
+    currentStreak++;
+    streak.innerText = currentStreak.toString();
 }
 // "Ouvintes" para o input e botões
 guessButton.addEventListener('click', handleGuess);
@@ -140,7 +143,7 @@ hintButton.addEventListener('click', handleHint);
  */
 function handleHint() {
     return __awaiter(this, void 0, void 0, function* () {
-        feedbackText.textContent = "A gerar uma dica... (Chamando IA)";
+        feedbackText.textContent = "Gerando uma dica... (Chamando IA)";
         hintButton.disabled = true; // Desativa o botão para evitar spam
         try {
             const response = yield fetch(`${API_URL_IA}/getJojoTip`, {
@@ -170,36 +173,33 @@ function handleHint() {
  * um cartão visual para cada um.
  */
 function renderCharacterCards(characters) {
-    // 1. Captura o container (só precisamos dele aqui)
     const container = document.getElementById('character-cards-container');
-    // Se não encontrar o container, para a execução
     if (!container) {
-        console.error("Erro: Container '#character-cards-container' não foi encontrado.");
+        console.warn("Aviso: Container da galeria (#character-cards-container) não encontrado no HTML.");
         return;
     }
-    // 2. Limpa o container (caso esta função seja chamada novamente)
     container.innerHTML = '';
-    // 3. Faz um loop por cada personagem e cria o HTML
+    // Debug: Ver se a lista está vazia
+    if (characters.length === 0) {
+        container.innerHTML = '<p style="color: #666; text-align: center;">Nenhum personagem carregado.</p>';
+        return;
+    }
     for (const char of characters) {
-        // Cria o elemento 'div' principal do cartão
         const card = document.createElement('div');
-        card.classList.add('character-card');
-        // Cria a imagem
+        card.className = 'character-card'; // Usa a classe do CSS
         const img = document.createElement('img');
+        // Usa char.imageUrl (se vier do DB com esse nome)
         img.src = char.imageUrl;
-        img.alt = `Imagem de ${char.name}`;
-        // Cria o nome
+        img.alt = char.name;
+        // Placeholder caso a imagem quebre
+        img.onerror = () => { img.src = 'https://placehold.co/100x100/333/FFF?text=JoJo'; };
         const name = document.createElement('p');
         name.textContent = char.name;
-        // Adiciona um "tooltip" (dica) ao passar o rato
-        // para o caso de o nome estar cortado
-        card.title = char.name;
-        // "Monta" o cartão
         card.appendChild(img);
         card.appendChild(name);
-        // Adiciona o cartão final ao container na página
         container.appendChild(card);
     }
+    console.log(`[Galeria] ${characters.length} cards renderizados.`);
 }
 /*
  * ==========================================

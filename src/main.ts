@@ -43,8 +43,8 @@ const feedbackText = document.getElementById('feedback-text') as HTMLParagraphEl
 const hintButton = document.getElementById('hint-button') as HTMLButtonElement;
 const suggestionsContainer = document.getElementById('autocomplete-suggestions') as HTMLDivElement;
 const streak = document.getElementById('streak') as HTMLSpanElement;
-streak.innerText = '3';
-let currentStreak = 1;
+streak.innerText = '0';
+let currentStreak = 0;
 /*
  * Documentação: Inicialização do Jogo
  *
@@ -139,8 +139,6 @@ function handleGuess(): void {
 
     // Se encontrou, cria a linha de resultado
     createResultRow(guessedCharacter);
-    guessCount++; // Incrementa a tentativa
-
     // Verifica se o jogador ganhou
     if (guessedCharacter.name === targetCharacter.name) {
         feedbackText.textContent = `Parabéns! Você acertou: ${targetCharacter.name}!`;
