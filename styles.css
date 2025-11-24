@@ -285,3 +285,105 @@ main {
     color: #333;
 }
 
+/* ==========================================
+ * ESTILOS DE RESPONSIVIDADE (MEDIA QUERIES)
+ * ==========================================
+*/
+
+@media (max-width: 768px) {
+    /* 1. Ajustes Gerais de Layout */
+    body {
+        /* Remove o texto grande de fundo em telas pequenas */
+        background-attachment: scroll; 
+    }
+
+    body::before {
+        font-size: 10rem; /* Reduz o tamanho do 'ゴゴゴゴ' */
+        opacity: 0.05;
+    }
+
+    main {
+        width: 95%; /* Usa mais espaço horizontal em telas pequenas */
+        padding: 0 10px; /* Adiciona um pequeno padding nas laterais */
+    }
+
+    /* 2. Ajustes de Tipografia */
+    .title {
+        font-size: 3rem; /* Reduz o título principal */
+    }
+
+    .subtitle {
+        font-size: 0.9rem;
+    }
+
+    /* 3. Ajustes do Input e Botões */
+    .guess-section {
+        flex-direction: column; /* Coloca o input e o botão um em cima do outro */
+        gap: 5px;
+    }
+
+    /* O botão agora fica em sua própria linha e ocupa toda a largura */
+    #guess-button {
+        width: 100%;
+        margin-top: 5px;
+    }
+    
+    /* Ajusta a largura do container de sugestões após mudar o layout do input */
+    .guess-container {
+        margin-bottom: 20px;
+    }
+
+    /* O elemento de sugestões deve se alinhar à nova largura */
+    #autocomplete-suggestions {
+        /* O topo é ajustado porque o layout do input/botão mudou */
+        top: 45px; 
+        left: 0;
+        /* A largura agora é 100% do .guess-container, pois o botão está em outra linha */
+        width: 100%; 
+    }
+
+    /* 4. O Ponto Mais Crítico: Reestruturação do Grid de Resultados */
+    .results-header, .result-row {
+        /* Muda o layout do grid para exibir apenas 3 colunas por linha */
+        grid-template-columns: 1fr 1fr 1fr; 
+        
+        /* Aumenta um pouco o espaçamento */
+        gap: 10px;
+        margin-bottom: 10px;
+        padding: 10px;
+        /* Adiciona um fundo para agrupar as células de cada tentativa */
+        background-color: #141414; 
+        border: 1px solid #2a2a2a;
+        border-radius: 10px;
+    }
+
+    /* Esconde as células que não cabem no layout de 3 colunas.
+       Vamos exibir as informações na ordem de:
+       Personagem, Idade, Parte, Stand (na 2ª linha)
+    */
+
+    /* Estilos para a segunda linha de informações (Gênero e Stand) */
+    .result-row::after {
+        content: attr(data-secondary-info);
+        grid-column: 1 / -1; /* Ocupa todas as colunas da linha */
+        text-align: left;
+        padding: 8px;
+        font-size: 0.8em;
+        color: #a3a3a3;
+        background-color: #1a1a1a;
+        border-radius: 5px;
+    }
+
+    .result-cell {
+        min-height: auto;
+        padding: 6px;
+    }
+
+    .results-header {
+        /* Esconde o cabeçalho original (Nome, Idade, Parte, Stand)
+           porque o formato do grid agora é confuso. 
+           O cabeçalho é menos importante em telas pequenas.
+        */
+        display: none; 
+    }
+}
