@@ -3,7 +3,7 @@
 /* Estilos gerais */
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    background-color: #0a0a0a;
+    background-color: #3b2e36;
     color: #e5e5e5;
     display: flex;
     flex-direction: column;
@@ -15,7 +15,7 @@ body::before {
     content: 'ゴゴゴゴ';
     position: fixed;
     font-size: 20rem;
-    color: rgba(255, 215, 0, 0.03);
+    color: rgba(255, 215, 0, 0.06);
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -284,6 +284,56 @@ main {
     background-color: #ffc107;
     color: #333;
 }
+
+.character-gallery-div{
+  display: flex; /* Makes the container a flex container */
+  justify-content: space-around; /* Distributes space between items */
+  align-items: flex-start;
+}
+
+/* =========================================
+      7. GALERIA DE CARTÕES (Extra)
+      ========================================= */
+   .character-gallery h2 {
+       font-size: 1.5rem;
+       font-weight: 700;
+   }
+   
+   #character-cards-container {
+       display: grid;
+       grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+       gap: 15px;
+   }
+   
+   .character-card {
+       background: #141414;
+       border: 1px solid #2a2a2a;
+       border-radius: 12px;
+       padding: 15px;
+       text-align: center;
+       transition: transform 0.2s;
+   }
+   
+   .character-card:hover {
+       transform: translateY(-5px);
+       border-color: #FFD700;
+   }
+   
+   .character-card img {
+       width: 80px;
+       height: 80px;
+       object-fit: cover;
+       object-position: top center;
+       border-radius: 50%;
+       margin-bottom: 10px;
+       border: 2px solid #333;
+   }
+   
+   .character-card p {
+       font-size: 0.9rem;
+       color: #e5e5e5;
+       font-weight: 600;
+   }
 
 /* ==========================================
  * ESTILOS DE RESPONSIVIDADE (MEDIA QUERIES)

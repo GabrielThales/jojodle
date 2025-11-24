@@ -61,6 +61,9 @@ async function initGame() {
         if (!responseAll.ok) throw new Error('Falha ao buscar lista de personagens.');
         allCharactersDB = await responseAll.json();
         console.log("Banco de dados local carregado:", allCharactersDB);
+        allCharactersDB.sort((a, b) => a.name.localeCompare(b.name));
+
+        renderCharacterCards(allCharactersDB);
 
 
         // 2. Buscar o PERSONAGEM DO DIA
@@ -119,6 +122,7 @@ guessInput.addEventListener('input', () => {
 function handleGuess(): void {
     const guessName = guessInput.value.trim();
     feedbackText.textContent = ''; // Limpa o feedback
+    guessCount++
 
     if (!guessName) {
         feedbackText.textContent = 'Por favor, insira um nome.';
@@ -227,6 +231,7 @@ function renderCharacterCards(characters: Character[]): void {
         // Usa char.imageUrl (se vier do DB com esse nome)
         img.src = char.imageUrl; 
         img.alt = char.name;
+        img.classList.add('char-image');
         // Placeholder caso a imagem quebre
         img.onerror = () => { img.src = 'https://placehold.co/100x100/333/FFF?text=JoJo'; };
 
@@ -236,6 +241,8 @@ function renderCharacterCards(characters: Character[]): void {
         card.appendChild(img);
         card.appendChild(name);
         container.appendChild(card);
+
+        
     }
     console.log(`[Galeria] ${characters.length} cards renderizados.`);
 }
